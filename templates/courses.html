@@ -1,0 +1,12 @@
+<!-- templates/courses.html -->
+{{ define "content" }}
+<div class="container">
+    <h1>{{ .Title }}</h1>
+    <p>We offer the following courses:</p>
+    <ul>
+        {{ range .Courses }}
+        <li>{{ . }}</li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

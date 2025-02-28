@@ -1,0 +1,12 @@
+<!-- templates/service.html -->
+{{ define "content" }}
+<div class="container">
+    <h1>{{ .Title }}</h1>
+    <p>We offer the following services:</p>
+    <ul>
+        {{ range .Services }}
+        <li>{{ . }}</li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

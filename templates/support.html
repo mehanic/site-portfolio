@@ -1,0 +1,12 @@
+<!-- templates/support.html -->
+{{ define "content" }}
+<div class="container">
+    <h1>{{ .Title }}</h1>
+    <p>We provide the following support options:</p>
+    <ul>
+        {{ range .Support }}
+        <li>{{ . }}</li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

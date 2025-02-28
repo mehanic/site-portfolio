@@ -1,0 +1,12 @@
+<!-- templates/exclusives.html -->
+{{ define "content" }}
+<div class="container">
+    <h1>{{ .Title }}</h1>
+    <p>Our exclusive content includes:</p>
+    <ul>
+        {{ range .Exclusives }}
+        <li>{{ . }}</li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

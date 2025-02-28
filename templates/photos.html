@@ -1,0 +1,12 @@
+<!-- templates/photos.html -->
+{{ define "content" }}
+<div class="container">
+    <h1>{{ .Title }}</h1>
+    <p>Here are some photos:</p>
+    <ul>
+        {{ range .Photos }}
+        <li>{{ . }}</li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}
