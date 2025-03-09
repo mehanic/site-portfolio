@@ -1,12 +1,73 @@
-<!-- templates/exclusives.html -->
-{{ define "content" }}
-<div class="container">
-    <h1>{{ .Title }}</h1>
-    <p>Our exclusive content includes:</p>
-    <ul>
-        {{ range .Exclusives }}
-        <li>{{ . }}</li>
-        {{ end }}
-    </ul>
-</div>
-{{ end }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Engineering Manager & Cloud Native Expert</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>Peter</h1>
+            <h2>Engineering Manager | Software Architect | Cloud Native Expert</h2>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main class="container">
+        <section class="about">
+            <h2>Who Am I?</h2>
+            <p>
+                An Engineering Manager, Software Architect, and a Cloud Native Development Expert with <strong>18+ years</strong> of technology leadership experience. 
+                Specialized in building <strong>B2B, B2C, AIOps, and DevSecOps Products</strong> while working with high-growth startups.
+            </p>
+            <p>
+                I have taken on multiple roles, including <strong>Product Development, Budget Financials, SDLC, KPI, BI, UI/UX, and Customer Acquisition</strong>. 
+                I excel at planning, leading, and creating new monetization and revenue streams.
+            </p>
+        </section>
+
+        <section class="expertise">
+            <h2>My Expertise</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Cloud Native Designs</h3>
+                    <p>Microservices, serverless, CI/CD, TDD, DDD, Kubernetes, Docker, and more.</p>
+                </div>
+                <div class="card">
+                    <h3>Application Development</h3>
+                    <p>Web, Mobile, Desktop, IoT applications with modern frameworks and best practices.</p>
+                </div>
+                <div class="card">
+                    <h3>Technology Evangelism</h3>
+                    <p>Servant leadership, knowledge sharing, writing, mentoring, and conference speaking.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="certifications">
+            <h2>Certifications & Achievements</h2>
+            <ul>
+                <li>✅ CKAD, CKS & CKA - Certified Kubernetes </li>
+                <li>📌 Currently pursuing kafka</li>
+                <li>🏆 PSM - Professional Scrum Master</li>
+                <li>🚀 Extensive experience with AWS, Azure, GCP</li>
+            </ul>
+        </section>
+
+        <section class="contact">
+            <h2>Contact Me</h2>
+            <p>Email: <a href="mailto:peter@google.com">iam@arslanali.io</a></p>
+            <p>Phone: <a href="tel:+13017414229">+1 301 7414 229</a></p>
+            <p>Skype: <a href="telegram:12345">ansaries</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025  All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

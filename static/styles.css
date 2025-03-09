@@ -1,10 +1,27 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset some default styles */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
+/* Basic page layout */
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    padding: 0;
+    margin: 0;
+}
+
+/* Main container */
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Section */
 header {
     background: #333;
     color: white;
@@ -12,9 +29,23 @@ header {
     text-align: center;
 }
 
+.title {
+    font-size: 3em;
+    font-weight: bold;
+    color: #f4f4f4;
+}
+
+.intro {
+    font-size: 1.2em;
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+/* Navigation */
 nav ul {
     list-style: none;
     padding: 0;
+    text-align: center;
 }
 
 nav ul li {
@@ -25,8 +56,10 @@ nav ul li {
 nav ul li a {
     color: white;
     text-decoration: none;
+    font-size: 1.1em;
 }
 
+/* Main Content */
 main {
     padding: 20px;
     background: white;
@@ -34,10 +67,101 @@ main {
     margin: 20px auto;
 }
 
+/* Services Section */
+.services {
+    margin-top: 40px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #34495e;
+}
+
+/* Service Categories */
+.service-category {
+    margin-bottom: 40px;
+}
+
+.service-category h3 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #2980b9;
+}
+
+.service-category ul {
+    list-style-type: none;
+}
+
+.service-category ul li {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.service-category ul li strong {
+    font-weight: bold;
+    color: #16a085;
+}
+
+/* Call-to-Action Section */
+.call-to-action {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.call-to-action h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #e67e22;
+}
+
+.call-to-action p {
+    font-size: 1.2em;
+}
+
+.call-to-action a {
+    text-decoration: none;
+    color: #e67e22;
+    font-weight: bold;
+}
+
+/* Footer Section */
 footer {
     text-align: center;
     padding: 10px;
     background: #333;
     color: white;
     margin-top: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    .title {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    .service-category h3 {
+        font-size: 1.5em;
+    }
+
+    .service-category ul li {
+        font-size: 1.1em;
+    }
+
+    .call-to-action h2 {
+        font-size: 1.5em;
+    }
 }

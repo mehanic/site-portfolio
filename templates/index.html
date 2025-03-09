@@ -1,7 +1,39 @@
-<!-- templates/index.html -->
-{{ define "content" }}
-<div class="container">
-    <h1>{{ .Title }}</h1>
-    <p>Welcome to our DevOps platform!</p>
-</div>
-{{ end }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Website</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to My Website</h1>
+        <p>Explore my services, courses, and more!</p>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+        <div class="container">
+            <h2>Navigate Through My Pages</h2>
+            <div class="page-links">
+                <ul>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/courses">Courses</a></li>
+                    <li><a href="/exclusives">Exclusives</a></li>
+                    <li><a href="/photos">Photos</a></li>
+                    <li><a href="/support">Support</a></li>
+                    <li><a href="/videos">Videos</a></li>
+                    <li><a href="/author">About the Author</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 My Website. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
