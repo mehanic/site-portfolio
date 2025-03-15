@@ -24,3 +24,24 @@ func renderPage(c *gin.Context, page string) {
 }
 ```
 
+
+### 3. **Provision portfollio:**
+# first variant but need postgresql as systemd
+```
+go run cmd/main.go
+```
+# second variand but need podman and podman-compose
+  ```
+  podman-compose build
+  podman-compose up
+  podman-compose down
+  podman images 
+  podman rmi portfolio 
+ ```
+ # third variant but need terraform
+  ```
+  terraform init
+  terraform plan
+  terraform apply 
+  terraform destroy
+```
