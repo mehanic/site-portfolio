@@ -164,4 +164,11 @@ footer {
     .call-to-action h2 {
         font-size: 1.5em;
     }
+
+    .page-links h2 {
+        display: block; /* Ensure it is on a new line */
+        text-align: left;
+        margin-bottom: 10px;
+    }
+    
 }

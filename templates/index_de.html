@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Website</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #191970; /* Dark blue background */
+            color: #f0ead6; /* Light beige text color */
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Language selector styles (positioned to the bottom-right corner) */
+        .language-selector-bottom {
+            position: absolute;
+            bottom: 20px; /* Position at the bottom */
+            right: 20px;  /* Position at the right */
+            background-color: rgba(0, 0, 0, 0.7); /* Darker background */
+            padding: 5px 15px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column; /* Stack the languages vertically */
+            align-items: center; /* Center the language options */
+        }
+
+        .language-selector-bottom a {
+            color: white !important;  /* White text */
+            font-weight: bold;
+            text-decoration: none;
+            margin-bottom: 5px; /* Space between each language option */
+        }
+
+        .language-selector-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px;
+            justify-content: space-between; /* Space between elements */
+        }
+
+        /* Text content */
+        .text-content {
+            flex: 2; /* Take more space */
+            padding: 20px;
+        }
+
+        .text-content h1 {
+            font-size: 5em;
+            margin: 0;
+            font-family: serif;
+        }
+
+        .text-content p {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+
+        .greeting {
+            font-size: 1.5em;
+        }
+
+        .current-job {
+            font-size: 0.9em;
+        }
+
+        /* Visual Elements */
+        .visual-elements {
+            flex: 1;
+            position: relative;
+        }
+
+        .circle-group {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+        }
+
+        .large-circle {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #f0ead6;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .small-circle {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #f0ead6;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -10px;
+            left: -10px;
+        }
+
+        .lines {
+            position: absolute;
+            top: 10%;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom left, rgba(240, 234, 214, 0.2) 0%, rgba(240, 234, 214, 0.2) 25%, transparent 25%, transparent 50%, rgba(240, 234, 214, 0.2) 50%, rgba(240, 234, 214, 0.2) 75%, transparent 75%, transparent 100%);
+            background-size: 200% 200%;
+            transform: rotate(-20deg);
+        }
+
+        /* Navigation Section - Move to left column */
+        main {
+            width: 80%; /* Define container width */
+            margin-top: 5px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .page-links {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px; /* Move to the left side */
+            padding: 0;
+        }
+
+        .page-links h2 {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .page-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .page-links ul li {
+            margin: 5px 0;
+        }
+
+        .page-links ul li a {
+            color: #f0ead6;
+            text-decoration: none;
+        }
+
+        /* Footer Section Styles */
+        footer {
+            background-color: #f0f0f0;
+            padding: 20px 0;
+            text-align: center;
+            color: #333;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Certification Section Styles */
+        .certification-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;  /* Decreased padding */
+            background-color: #f0f0f0;
+            margin: 10px 0;  /* Reduced margin */
+        }
+
+        .certification {
+            text-align: center;
+            margin: 5px;  /* Decreased margin around each certification */
+        }
+
+        .certification-image {
+            width: 120px;  /* Reduced the image size */
+            height: auto;
+        }
+
+        .certification-title {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Language Selector (Bottom-Right Corner) -->
+    <div class="language-selector-bottom">
+        <a href="/?lang=de">Deutsch</a> 
+        <a href="/?lang=en">English</a>
+        <a href="/?lang=nl">Nederlands</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Text Content -->
+        <div class="text-content">
+            <h1>Willkommen</h1>
+            <p class="greeting">Hallo und willkommen auf meiner Website!</p>
+            <p class="current-job">Dieses Portfolio wurde als experimentelles Projekt entwickelt, um Golang mit dem Gin-Framework und verschiedenen DevOps-Tools zu erkunden, darunter Podman (Containerverwaltung und Orchestrierung), Podman-Compose (Verwaltung von Multi-Container-Umgebungen) und Terraform für die automatisierte Serverbereitstellung.</p>
+        </div>
+
+        <!-- Visual Elements -->
+        <div class="visual-elements">
+            <div class="circle-group">
+                <div class="large-circle">
+                    <div class="small-circle"></div>
+                </div>
+            </div>
+            <div class="lines"></div>
+        </div>
+    </div>
+
+    <!-- Navigation Section -->
+    <main>
+        <div class="page-links">
+            <h2>Navigate</h2>
+            <ul>
+                <li><a href="/services?lang={{.Lang}}">Dienstleistungen</a></li>
+                <li><a href="/author?lang={{.Lang}}">Über den Autor</a></li>
+                <li><a href="/courses?lang={{.Lang}}">Lebenslauf</a></li>
+                <li><a href="/exclusives?lang={{.Lang}}">Exklusives</a></li>
+                <li><a href="/photos?lang={{.Lang}}">Fotos</a></li>
+                <li><a href="/support?lang={{.Lang}}">Unterstützung</a></li>
+                <li><a href="/videos?lang={{.Lang}}">Videos</a></li>
+                <li><a href="/contact?lang={{.Lang}}">Rückmeldung</a></li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Certification Section -->
+    <div class="certification-container">
+        <div class="certification">
+            <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*UgpvavZsBBEkZQYNfbQz5w.jpeg" alt="CKA" class="certification-image">
+        </div>
+        <div class="certification">
+            <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*iKaawBA6SjOSXa844lCAvA.jpeg" alt="CKAD" class="certification-image">
+        </div>
+        <div class="certification">
+            <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*3f29BJapkM-A0P-cU6Cn3A.png" alt="CKSS" class="certification-image">
+        </div>
+        <div class="certification">
+            <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*wdYGIp1yLEdx3FzyoVSG1Q.jpeg" alt="CKA" class="certification-image">
+        </div>
+        <div class="certification">
+            <img src="https://media.licdn.com/dms/image/v2/D4D12AQEvaRmaV8TY3Q/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1657998511292?e=2147483647&v=beta&t=kl2aOWtJgYBLkapbXmfRRBQrNK6aq22Bdl5CP5vQ6ig" alt="CKA" class="certification-image">
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <!-- <p>&copy; 2025 My Website. All Rights Reserved.</p> -->
+    </footer>
+
+</body>
+</html>

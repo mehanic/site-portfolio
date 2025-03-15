@@ -1,16 +1,21 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
 	"net/smtp"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq" // PostgreSQL driver
 )
 
-// SMTP configuration
+// SMTP Configuration
 const (
 	SMTPServer = "smtp.gmail.com"
 	SMTPPort   = "587"
@@ -19,15 +24,38 @@ const (
 var (
 	SMTPUser     = os.Getenv("SMTP_USER")
 	SMTPPassword = os.Getenv("SMTP_PASS")
+	DBConnStr    = os.Getenv("DATABASE_URL") // Database connection string
 )
 
+var db *sql.DB // Database connection
+
 func main() {
+
+	loadEnv()
 	// Check if SMTP credentials are set
 	if SMTPUser == "" || SMTPPassword == "" {
 		log.Fatal("SMTP credentials are not set. Please set SMTP_USER and SMTP_PASS environment variables.")
 	}
 
+	// Connect to PostgreSQL
+	var err error
+	db, err = sql.Open("postgres", DBConnStr)
+	if err != nil {
+		log.Fatal("Failed to connect to database:", err)
+	}
+	defer db.Close()
+
+	// Test database connection
+	err = db.Ping()
+	if err != nil {
+		log.Fatal("Database connection failed:", err)
+	}
+	fmt.Println("Connected to PostgreSQL database!")
+
 	router := gin.Default()
+
+	// Set trusted proxies to avoid the warning (adjust this based on your proxy configuration)
+	router.SetTrustedProxies([]string{"127.0.0.1"}) // Replace with your trusted proxy IPs if needed
 
 	// Middleware to log every request
 	router.Use(gin.Logger())
@@ -87,15 +115,23 @@ func main() {
 			return
 		}
 
-		// Send email
-		err := sendEmail(name, email, message)
+		// Store message in PostgreSQL
+		err := saveMessageToDB(name, email, message)
 		if err != nil {
-			log.Println("Error sending email:", err)
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to send message"})
+			log.Println("Error saving message to database:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save message"})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{"success": "Message sent successfully!"})
+		// Send email notification
+		err = sendEmail(name, email, message)
+		if err != nil {
+			log.Println("Error sending email:", err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to send email"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"success": "Message sent and saved successfully!"})
 	})
 
 	// Debug route to check static files
@@ -124,6 +160,50 @@ func main() {
 	router.Run(":8080")
 }
 
+// Load environment variables from .env file
+
+// Load environment variables from .env file
+func loadEnv() {
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	SMTPUser = os.Getenv("SMTP_USER")
+	SMTPPassword = os.Getenv("SMTP_PASS")
+	DBConnStr = os.Getenv("DATABASE_URL")
+}
+
+// Handle contact form submission
+func handleSendMessage(c *gin.Context) {
+	name := c.PostForm("name")
+	email := c.PostForm("email")
+	message := c.PostForm("message")
+
+	if name == "" || email == "" || message == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "All fields are required"})
+		return
+	}
+
+	if err := saveMessageToDB(name, email, message); err != nil {
+		log.Println("Error saving message to database:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save message"})
+		return
+	}
+
+	if err := sendEmail(name, email, message); err != nil {
+		log.Println("Error sending email:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to send email"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"success": "Message sent and saved successfully!"})
+}
+
+// Function to save message to PostgreSQL
+func saveMessageToDB(name, email, message string) error {
+	_, err := db.Exec("INSERT INTO contact_messages (name, email, message) VALUES ($1, $2, $3)", name, email, message)
+	return err
+}
+
 // Function to send email
 func sendEmail(name, email, message string) error {
 	auth := smtp.PlainAuth("", SMTPUser, SMTPPassword, SMTPServer)
@@ -140,7 +220,24 @@ func sendEmail(name, email, message string) error {
 	addr := SMTPServer + ":" + SMTPPort
 	return smtp.SendMail(addr, auth, email, to, msg)
 }
+func logError(context string, err error) {
+	if err != nil {
+		log.Printf("[ERROR] %s: %v", context, err)
+	}
+}
 
 
+func setupGracefulShutdown(router *gin.Engine) {
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
+
+	go func() {
+		<-quit
+		fmt.Println("\nShutting down server...")
+		db.Close()
+		os.Exit(0)
+	}()
+}
 // export SMTP_USER="your-email@gmail.com"
 // export SMTP_PASS="your-secure-password"
+//export DATABASE_URL="postgres://mehanic:new_password@localhost:5432/portfolio?sslmode=require"

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Ideas</title>
+  
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #0d1117;
+      color: #00ff00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      width: 90%;
+    }
+
+    /* Terminal */
+    .terminal {
+      flex-grow: 1;
+      background-color: #0b0f14;
+      border-radius: 8px;
+      padding: 30px; /* Increased padding for better spacing */
+    }
+
+    .terminal-header {
+      background-color: #6c3483;
+      color: white;
+      padding: 15px;
+      font-size: 1.5rem; /* Larger font */
+      font-weight: bold;
+    }
+
+    .tab {
+      margin-right: 15px;
+    }
+
+    .tab.active {
+      font-weight: bold;
+    }
+
+    .terminal-content {
+      padding: 30px;
+      font-size: 1.5rem; /* Enlarged terminal font */
+    }
+
+    .title {
+      font-size: 3rem; /* Increased title size */
+    }
+
+    .subtitle {
+      margin-bottom: 20px;
+      font-size: 1.5rem; /* Larger subtitle */
+    }
+
+    .commands {
+      list-style-type: none;
+    }
+
+    .commands li {
+      margin-bottom: 10px;
+      font-size: 1.5rem; /* Commands enlarged */
+    }
+
+    .input-line {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00ff00;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 1.2rem;
+    }
+
+    /* CV Links */
+    a {
+      display: inline-block;
+      margin: 15px 0;
+      padding: 12px 20px;
+      font-size: 1.5rem; /* Enlarged CV download links */
+      background-color: #6c3483;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    a:hover {
+      background-color: #5a2d70;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Terminal Section -->
+    <div class="terminal">
+      <!-- Header Tabs -->
+      <div class="terminal-header">
+        <span class="tab active">Terminal</span>
+        <span class="tab">+</span>
+      </div>
+
+      <!-- Terminal Content -->
+      <div class="terminal-content">
+        <h3 class="title">PETRO DIACHENKO</h3>
+
+       
+        <ul class="commands">
+          <h3>Download My CV</h3>
+          
+          <p>You can download my English CV here:</p>
+          <a href="/static/DevOps_English.pdf" download>DevOps_English</a>
+
+          <p>You can download my German CV here:</p>
+          <a href="/static/DevOps_Deutch.pdf" download>DevOps_Deutch</a>
+        </ul>
+
+        <!-- Terminal Input -->
+        <p class="input-line">Petro@Diachenko:~$</p>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer"></div>
+    </div>
+  </div>
+</body>
+</html>
