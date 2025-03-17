@@ -1,0 +1,30 @@
+- name: Deploy site-portfolio with Podman
+  hosts: site-portfolio
+  become: true
+  tasks:
+
+    - name: Install dependencies (Podman, Podman-Compose, Git)
+      ansible.builtin.package:
+        name:
+          - podman
+          - podman-compose
+          - git
+        state: present
+
+    - name: Copy project files to server
+      ansible.builtin.copy:
+        src: files/site-portfolio/
+        dest: /home/{{ ansible_user }}/site-portfolio/
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0755'
+
+    - name: Build Dockerfile with Podman Compose
+      ansible.builtin.command:
+        cmd: podman-compose build
+        chdir: /home/{{ ansible_user }}/site-portfolio
+
+    - name: Run containers with Podman Compose
+      ansible.builtin.command:
+        cmd: podman-compose up -d
+        chdir: /home/{{ ansible_user }}/site-portfolio
