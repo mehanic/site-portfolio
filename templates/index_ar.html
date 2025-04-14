@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Website</title>
+    <title>مرحباً بك في موقعي</title>
     <style>
+        /* General Styles */
         body {
             font-family: sans-serif;
             background-color: #191970; /* Dark blue background */
@@ -15,13 +16,14 @@
             justify-content: center;
             flex-direction: column;
             min-height: 100vh;
+            direction: rtl; /* Right to left direction */
         }
 
         /* Language selector styles (positioned to the bottom-right corner) */
         .language-selector-bottom {
             position: absolute;
             bottom: 20px; /* Position at the bottom */
-            right: 20px;  /* Position at the right */
+            left: 20px;  /* Position at the left (for RTL layout) */
             background-color: rgba(0, 0, 0, 0.7); /* Darker background */
             padding: 5px 15px;
             border-radius: 5px;
@@ -47,6 +49,7 @@
             max-width: 1200px;
             margin: 20px;
             justify-content: space-between; /* Space between elements */
+            direction: rtl; /* Right to left direction */
         }
 
         /* Text content */
@@ -83,7 +86,7 @@
         .circle-group {
             position: absolute;
             top: 20%;
-            right: 10%;
+            left: 10%; /* Move the circles to the left in RTL */
         }
 
         .large-circle {
@@ -101,18 +104,18 @@
             border-radius: 50%;
             position: absolute;
             bottom: -10px;
-            left: -10px;
+            right: -10px; /* Change for RTL */
         }
 
         .lines {
             position: absolute;
             top: 10%;
-            right: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom left, rgba(240, 234, 214, 0.2) 0%, rgba(240, 234, 214, 0.2) 25%, transparent 25%, transparent 50%, rgba(240, 234, 214, 0.2) 50%, rgba(240, 234, 214, 0.2) 75%, transparent 75%, transparent 100%);
+            background: linear-gradient(to bottom right, rgba(240, 234, 214, 0.2) 0%, rgba(240, 234, 214, 0.2) 25%, transparent 25%, transparent 50%, rgba(240, 234, 214, 0.2) 50%, rgba(240, 234, 214, 0.2) 75%, transparent 75%, transparent 100%);
             background-size: 200% 200%;
-            transform: rotate(-20deg);
+            transform: rotate(20deg); /* Adjust the rotation for RTL */
         }
 
         /* Navigation Section - Move to left column */
@@ -127,12 +130,12 @@
         .page-links {
             display: flex;
             flex-direction: column;
-            margin-left: 20px; /* Move to the left side */
+            margin-right: 20px; /* Move to the right side */
             padding: 0;
         }
 
         .page-links h2 {
-            text-align: left;
+            text-align: right;
             margin-bottom: 10px;
         }
 
@@ -195,69 +198,72 @@
     <div class="language-selector-bottom">
         <a href="/?lang=de">Deutsch</a> 
         <a href="/?lang=en">English</a>
-        <a href="/?lang=nl">Nederlands</a>
+        <a href="/?lang=nl">العربية</a>
     </div>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Text Content -->
-        <div class="text-content">
-            <h1>Welkom</h1>
-            <p class="greeting">Hallo en welkom op mijn website!</p>
-            <p class="current-job">Dit portfolio is gebouwd als een experimenteel project om Golang met het Gin-framework en verschillende DevOps-tools te verkennen, waaronder Podman (Containerbeheer en orkestratie), Podman-Compose (beheer van omgevingen met meerdere containers) en Terraform voor geautomatiseerde servervoorziening.</p>
-        </div>
+    <!-- الحاوية الرئيسية -->
+<div class="container">
+    <!-- محتوى النص -->
+    <div class="text-content">
+        <h1>مرحباً</h1>
+        <p class="greeting">مرحباً بك في موقعي!</p>
+        <p class="current-job">
+            تم بناء هذا المعرض كمشروع تجريبي لاستكشاف لغة 
+            غو (لغة برمجة) باستخدام إطار جين هو إطار عمل خفيف وسريع لتطوير تطبيقات الويب باستخدام لغة جولانغ، بالإضافة إلى عدد من أدوات مهندس ديفوبس مثل بودمان (لإدارة وتشغيل الحاويات)، و  بودمان-كومبوز (لإدارة البيئات متعددة الحاويات)، و   تيرافورم  لتوفير الخوادم بشكل تلقائي.
+        </p>
+    </div>
 
-        <!-- Visual Elements -->
-        <div class="visual-elements">
-            <div class="circle-group">
-                <div class="large-circle">
-                    <div class="small-circle"></div>
-                </div>
+    <!-- العناصر البصرية -->
+    <div class="visual-elements">
+        <div class="circle-group">
+            <div class="large-circle">
+                <div class="small-circle"></div>
             </div>
-            <div class="lines"></div>
         </div>
+        <div class="lines"></div>
     </div>
+</div>
 
-    <!-- Navigation Section -->
-    <main>
-        <div class="page-links">
-            <h2>Navigeren</h2>
-            <ul>
-                <li><a href="/services?lang={{.Lang}}">Diensten</a></li>
-                <li><a href="/author?lang={{.Lang}}">Over de auteur</a></li>
-                <li><a href="/courses?lang={{.Lang}}">CV</a></li>
-                <li><a href="/exclusives?lang={{.Lang}}">Exclusives</a></li>
-                <li><a href="/photos?lang={{.Lang}}">Foto's</a></li>
-                <li><a href="/support?lang={{.Lang}}">Ondersteuning</a></li>
-                <li><a href="/videos?lang={{.Lang}}">Video's</a></li>
-                <li><a href="/contact?lang={{.Lang}}">Feedback</a></li>
-            </ul>
-        </div>
-    </main>
-
-    <!-- Certification Section -->
-    <div class="certification-container">
-        <div class="certification">
-            <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*UgpvavZsBBEkZQYNfbQz5w.jpeg" alt="CKA" class="certification-image">
-        </div>
-        <div class="certification">
-            <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*iKaawBA6SjOSXa844lCAvA.jpeg" alt="CKAD" class="certification-image">
-        </div>
-        <div class="certification">
-            <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*3f29BJapkM-A0P-cU6Cn3A.png" alt="CKSS" class="certification-image">
-        </div>
-        <div class="certification">
-            <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*wdYGIp1yLEdx3FzyoVSG1Q.jpeg" alt="CKA" class="certification-image">
-        </div>
-        <div class="certification">
-            <img src="https://media.licdn.com/dms/image/v2/D4D12AQEvaRmaV8TY3Q/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1657998511292?e=2147483647&v=beta&t=kl2aOWtJgYBLkapbXmfRRBQrNK6aq22Bdl5CP5vQ6ig" alt="CKA" class="certification-image">
-        </div>
+<!-- قسم التنقل -->
+<main>
+    <div class="page-links">
+        <h2>التنقل</h2>
+        <ul>
+            <li><a href="/services?lang={{.Lang}}">الخدمات</a></li>
+            <li><a href="/author?lang={{.Lang}}">عن المؤلف</a></li>
+            <li><a href="/courses?lang={{.Lang}}">السيرة الذاتية</a></li>
+            <li><a href="/exclusives?lang={{.Lang}}">المحتوى الحصري</a></li>
+            <li><a href="/photos?lang={{.Lang}}">الصور</a></li>
+            <li><a href="/support?lang={{.Lang}}">الدعم</a></li>
+            <li><a href="/videos?lang={{.Lang}}">الفيديوهات</a></li>
+            <li><a href="/contact?lang={{.Lang}}">ملاحظات</a></li>
+        </ul>
     </div>
+</main>
 
-    <!-- Footer Section -->
-    <footer>
-        <!-- <p>&copy; 2025 My Website. All Rights Reserved.</p> -->
-    </footer>
+<!-- قسم الشهادات -->
+<div class="certification-container">
+    <div class="certification">
+        <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*UgpvavZsBBEkZQYNfbQz5w.jpeg" alt="CKA" class="certification-image">
+    </div>
+    <div class="certification">
+        <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*iKaawBA6SjOSXa844lCAvA.jpeg" alt="CKAD" class="certification-image">
+    </div>
+    <div class="certification">
+        <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*3f29BJapkM-A0P-cU6Cn3A.png" alt="CKSS" class="certification-image">
+    </div>
+    <div class="certification">
+        <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*wdYGIp1yLEdx3FzyoVSG1Q.jpeg" alt="CKA" class="certification-image">
+    </div>
+    <div class="certification">
+        <img src="https://media.licdn.com/dms/image/v2/D4D12AQEvaRmaV8TY3Q/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1657998511292?e=2147483647&v=beta&t=kl2aOWtJgYBLkapbXmfRRBQrNK6aq22Bdl5CP5vQ6ig" alt="CKA" class="certification-image">
+    </div>
+</div>
+
+<!-- قسم التذييل -->
+<footer>
+    <!-- <p>&copy; 2025 جميع الحقوق محفوظة لموقعي.</p> -->
+</footer>
 
 </body>
 </html>

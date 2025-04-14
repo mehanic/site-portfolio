@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +21,8 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      direction: rtl; /* Set direction to right-to-left */
+      text-align: right; /* Align text to the right */
     }
 
     .container {
@@ -45,7 +47,7 @@
     }
 
     .tab {
-      margin-right: 15px;
+      margin-left: 15px; /* Changed to margin-left to align tabs properly */
     }
 
     .tab.active {
@@ -124,18 +126,18 @@
 
        
         <ul class="commands">
-          <h3>Download mijn CV</h3>
+          <h3>تحميل سيرتي الذاتية</h3>
           
-          <p>U kunt hier mijn Engelse CV downloaden:</p>
-          <a href="/static/DevOps_English.pdf" download>DevOps_Engels</a>
-
-          <p>U kunt hier mijn Duitse CV downloaden:</p>
-          <a href="/static/DevOps_Deutch.pdf" download>DevOps_Duits</a>
-
-          <p>Je kunt hier mijn Nederlandse CV downloaden:</p>
-          <a href="/static/DevOps_Deutch.pdf" download>DevOps_Nederland</a>
+          <p>يمكنك تحميل سيرتي الذاتية باللغة الإنجليزية هنا:</p>
+          <a href="/static/DevOps_English.pdf" download>DevOps_الإنجليزية</a>
+        
+          <p>يمكنك تحميل سيرتي الذاتية باللغة الألمانية هنا:</p>
+          <a href="/static/DevOps_Deutch.pdf" download>DevOps_الألمانية</a>
+        
+          <p>يمكنك تحميل سيرتي الذاتية باللغة العربية هنا:</p>
+          <a href="/static/DevOps_Arabic.pdf" download>DevOps_العربية</a>
         </ul>
-
+        
         <!-- Terminal Input -->
         <p class="input-line">Petro@Diachenko:~$</p>
       </div>

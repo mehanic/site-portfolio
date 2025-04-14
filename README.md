@@ -161,3 +161,228 @@ To remove the entire PostgreSQL volume (and all data), use:
 ```
 podman volume rm site-portfolio_postgres-data
 ```
+
+
+------------
+
+
+The error message `FATAL: password authentication failed for user "mehanic"` means that PostgreSQL is rejecting the password. Here’s how to fix it:
+
+---
+
+### **1. Reset the Password for User "mehanic"**
+Since you are logged in as `postgres`, you can manually reset the password.
+
+1. In the PostgreSQL prompt (`postgres=#`), run:
+
+   ```sql
+   ALTER USER mehanic WITH PASSWORD 'newpassword';
+   ```
+
+   **Replace `'newpassword'` with a strong password**.
+
+2. Exit the PostgreSQL prompt:
+
+   ```sql
+   \q
+   ```
+
+---
+
+### **2. Verify `pg_hba.conf` (PostgreSQL Authentication Configuration)**
+
+Since your database is running on Ubuntu, check if the authentication method is correct:
+
+1. Open `pg_hba.conf` with a text editor:
+
+   ```bash
+   sudo nano /etc/postgresql/16/main/pg_hba.conf
+   ```
+
+2. Look for a line like this:
+
+   ```plaintext
+   local   all             all                                     peer
+   ```
+
+   **Change it to:**
+
+   ```plaintext
+   local   all             all                                     md5
+   ```
+
+   This makes sure PostgreSQL asks for a password instead of using system user authentication.
+
+3. **Save and Exit** (`CTRL + X`, then `Y`, then `Enter`).
+
+---
+
+### **3. Restart PostgreSQL**
+After modifying `pg_hba.conf`, restart PostgreSQL to apply changes:
+
+```bash
+sudo systemctl restart postgresql
+```
+
+---
+
+### **4. Try Logging In Again**
+Now, try logging in with the new password:
+
+```bash
+sudo -u postgres psql
+```
+
+Then, switch to the database:
+
+```sql
+\c portfolio mehanic
+```
+
+Enter the new password and check if the connection is successful.
+
+---
+
+### **5. Update Connection String in Your Application**
+Now that the password is reset, update your **Go application’s** database connection string:
+
+```go
+DBConnStr = "user=mehanic password=newpassword dbname=portfolio host=127.0.0.1 port=5432 sslmode=disable"
+```
+
+**Then, restart your application:**
+
+```bash
+go run cmd/main.go
+```
+
+---
+
+### **Summary:**
+1. **Reset the password** for the `mehanic` user in PostgreSQL.
+2. **Change `pg_hba.conf`** to use `md5` authentication.
+3. **Restart PostgreSQL** to apply the changes.
+4. **Test login again** using `psql`.
+5. **Update your application’s database connection string**.
+
+This should resolve your authentication issue. Let me know if you need more help! 🚀
+
+
+The error **"role 'mehanic' does not exist"** means the PostgreSQL user (role) you're trying to use doesn't exist in the database. You need to create it first.
+
+---
+
+### **1. Create the User (Role) "mehanic"**
+Since you are logged in as `postgres`, run the following command in the PostgreSQL prompt:
+
+```sql
+CREATE ROLE mehanic WITH LOGIN PASSWORD 'newpassword';
+```
+
+> Replace `'newpassword'` with a strong password.
+
+Then, **grant privileges** to the user:
+
+```sql
+ALTER ROLE mehanic CREATEDB;
+ALTER ROLE mehanic CREATEROLE;
+ALTER ROLE mehanic SUPERUSER;
+```
+
+---
+
+### **2. Verify If the Role Exists**
+Check if the user `mehanic` is created:
+
+```sql
+\du
+```
+
+It should display a list of database roles, including `mehanic`.
+
+---
+
+### **3. Create the Database (If It Doesn't Exist)**
+If your database `portfolio` does not exist, create it:
+
+```sql
+CREATE DATABASE portfolio OWNER mehanic;
+```
+
+Then, **grant all privileges**:
+
+```sql
+GRANT ALL PRIVILEGES ON DATABASE portfolio TO mehanic;
+```
+
+---
+
+### **4. Update `pg_hba.conf` (If Needed)**
+If you're still getting authentication errors:
+
+1. Open the PostgreSQL authentication file:
+
+   ```bash
+   sudo nano /etc/postgresql/16/main/pg_hba.conf
+   ```
+
+2. Find this line:
+
+   ```plaintext
+   local   all             all                                     peer
+   ```
+
+   **Change it to:**
+
+   ```plaintext
+   local   all             all                                     md5
+   ```
+
+3. Save the file and exit (`CTRL + X`, then `Y`, then `Enter`).
+
+4. Restart PostgreSQL:
+
+   ```bash
+   sudo systemctl restart postgresql
+   ```
+
+---
+
+### **5. Test the Connection**
+Now, try logging in as `mehanic`:
+
+```bash
+psql -U mehanic -d portfolio -h 127.0.0.1 -W
+```
+
+It should prompt for a password—enter `newpassword`.
+
+---
+
+### **6. Update Your Application**
+Modify your **Go application's** database connection string in `config.go`:
+
+```go
+DBConnStr = "user=mehanic password=newpassword dbname=portfolio host=127.0.0.1 port=5432 sslmode=disable"
+```
+
+Restart your application:
+
+```bash
+go run cmd/main.go
+```
+
+---
+
+### **Summary**
+✅ **Created the user (`mehanic`)**  
+✅ **Created the database (`portfolio`)**  
+✅ **Granted permissions**  
+✅ **Updated authentication settings (`pg_hba.conf`)**  
+✅ **Restarted PostgreSQL**  
+✅ **Updated the app's connection string**  
+
+Now, your app should connect successfully! 🚀 Let me know if you need more help.
+
+
+sudo -u ubuntu /usr/local/bin/myservice

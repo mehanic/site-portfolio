@@ -29,7 +29,7 @@ func renderPage(c *gin.Context, page string) {
 func getLanguage(c *gin.Context) string {
 	lang := c.Query("lang") // Get `lang` from URL query
 	log.Printf("Selected language: %s", lang) // Log the selected language
-	if lang != "de" && lang != "en" && lang != "nl" {
+	if lang != "de" && lang != "en" && lang != "ar" {
 		lang = "en" // Default to English if no valid lang is found
 	}
 	return lang
