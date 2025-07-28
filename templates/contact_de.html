@@ -1,86 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #191970;;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 50%;
-            margin: 50px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        h2 {
-            color: #2c3e50;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            text-align: left;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px;
-            margin-top: 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kontaktformular</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h2>Nachricht senden</h2>
-        <form action="/send-message" method="POST">
-            <label for="name">Name *</label>
-            <input type="text" id="name" name="name" required>
+<body class="h-screen flex items-center justify-center bg-gray-100">
 
-            <label for="email">E-Mail *</label>
-            <input type="email" id="email" name="email" required>
+  <!-- Formular-Container -->
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-semibold text-center mb-6">Kontaktieren Sie uns</h2>
 
-            <label for="message">Nachricht  *</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+    <!-- Formular -->
+    <form action="/contact" method="POST" class="space-y-4">
+        <input type="hidden" name="lang" value="{{.Lang}}">
+      <!-- Namensfeld -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <input type="text" id="name" name="name" required
+          class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
 
-            <button type="submit">Nachricht senden</button>
-        </form>
-    </div>
+      <!-- E-Mail-Feld -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">E-Mail</label>
+        <input type="email" id="email" name="email" required
+          class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
 
-    <footer>
-        <p>&copy;©2025</p>
-        <p>Email: <a href="mailto:mehanic2000@gmail.com">mehanic2000@gmail.com</a></p>
-    </footer>
+      <!-- Nachrichtenfeld -->
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700">Nachricht</label>
+        <textarea id="message" name="message" rows="4" required
+          class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+      </div>
+
+      <!-- Absenden-Button -->
+      <div class="flex justify-center">
+        <button type="submit"
+          class="mt-4 px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          Nachricht senden
+        </button>
+      </div>
+    </form>
+  </div>
 
 </body>
 </html>

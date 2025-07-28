@@ -1,95 +1,50 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أرسل رسالة</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #191970;
-            margin: 0;
-            padding: 0;
-            direction: rtl; /* Right-to-left text direction */
-            text-align: right; /* Align text to the right */
-        }
-
-        .container {
-            width: 50%;
-            margin: 50px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: right; /* Align content to the right */
-        }
-
-        h2 {
-            color: #2c3e50;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            text-align: right; /* Right-align the labels */
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px;
-            margin-top: 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        footer {
-            text-align: right;
-            padding: 15px;
-        }
-
-        footer a {
-            color: #3498db;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نموذج الاتصال</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h2>أرسل رسالة</h2>
-        <form action="/send-message" method="POST">
-            <label for="name">الاسم *</label>
-            <input type="text" id="name" name="name" required>
+<body class="h-screen flex items-center justify-center bg-gray-100">
 
-            <label for="email">البريد الإلكتروني *</label>
-            <input type="email" id="email" name="email" required>
+  <!-- نموذج الاتصال -->
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-semibold text-center mb-6">اتصل بنا</h2>
 
-            <label for="message">الرسالة *</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+    <!-- النموذج -->
+    <form action="/contact" method="POST" class="space-y-4">
+        <input type="hidden" name="lang" value="{{.Lang}}">
+      <!-- حقل الاسم -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">الاسم</label>
+        <input type="text" id="name" name="name" required
+          class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
 
-            <button type="submit">إرسال الرسالة</button>
-        </form>
-    </div>
-    <footer>
-        <p>&copy;2025</p>
-        <p>البريد الإلكتروني: <a href="mailto:mehanic2000@gmail.com">mehanic2000@gmail.com</a></p>
-    </footer>
+      <!-- حقل البريد الإلكتروني -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">البريد الإلكتروني</label>
+        <input type="email" id="email" name="email" required
+          class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+
+      <!-- حقل الرسالة -->
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700">الرسالة</label>
+        <textarea id="message" name="message" rows="4" required
+          class="mt-1 block w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+      </div>
+
+      <!-- زر الإرسال -->
+      <div class="flex justify-center">
+        <button type="submit"
+          class="mt-4 px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          إرسال الرسالة
+        </button>
+      </div>
+    </form>
+  </div>
+
 </body>
 </html>

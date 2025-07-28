@@ -1,0 +1,190 @@
+  108  sudo apt install certbot
+  109  cd /etc/nginx/
+  110  ls
+  111  cd sites-available/
+  112  ls
+  113  cat default 
+  114  touch peterd.dev
+  115  touch peterd.dev.conf
+  116  sudo touch peterd.dev.conf
+  117  ls
+  118  cp default peterd.dev.conf 
+  119  sudo cp default peterd.dev.conf 
+  120  vim peterd.dev.conf 
+  121  sudo vim peterd.dev.conf 
+  122  sudo echo "" > peterd.dev.conf 
+  123  sudo vim peterd.dev.conf 
+  124  sudo su
+  125  ls
+  126  sudo ln -s /etc/nginx/sites-available/peterd.dev.conf /etc/nginx/sites-enabled/peterd.dev.conf
+  127  sudo nginx -t
+  128  sudo vim peterd.dev.conf 
+  129  sudo nginx -t
+  130  sudo vim peterd.dev.conf 
+  131  sudo nginx -t
+  132  ls /etc/nginx/sites-enabled/
+  133  curl -I http://peterd.dev
+  134  curl -I https://peterd.dev
+  135  cd /var/log/
+  136  cd -
+  137  cat /var/log/nginx/error.log 
+  138  cat /var/log/nginx/peterd.dev.error.log 
+  139  curl -I https://peterd.dev
+  140  curl -I https://peterd.dev/sw.js
+  141  cat /var/log/nginx/peterd.dev.error.log 
+  142  cat /var/log/nginx/peterd.dev.access.log 
+  143  curl -I https://peterd.dev
+  144  curl -I https://peterd.dev/fotos
+  145  curl -I https://peterd.dev/support
+  146  curl -H "Host: peterd.dev" https://example.com/env
+  147  curl -H "Host: peterd.dev" https://peterd.dev
+  148  history
+
+
+sudo apt-get install nginx
+  350  sudo systemctl status nginx
+  351  sudo systemctl enable nginx
+  352  cd /etc/nginx/
+  353  ls
+  354  cd conf.d/
+  355  ls
+  356  cd ..
+  357  ls
+  358  vim nginx.conf 
+  359  cd sites-available/
+  360  ls
+  361  vim default 
+  362  ls
+  363  cd site-portfolio/
+  364  cd cmd/
+  365  cat main.go 
+  366  telnet localhost 8080
+  367  sudo systemctl stop nginx
+  368  sudo systemctl status nginx
+  369  sudo  nginx -t
+  370  sudo systemctl start nginx
+  371  sudo systemctl status nginx
+  372  sudo systemctl enable nginx
+  373  ss -ntulp | grep :443
+  374  netstat -tulpn 
+  375  sudo apt install net-tools
+  376  netstat -tulpn 
+  377  sudo systemctl restart nginx.service 
+  378  sudo systemctl status nginx.service 
+  379  cat main.go 
+  380  vim main.go 
+  381  cd
+  382  ls
+  383  vim file.sh 
+  384  cd -
+  385  vim main.go 
+  386  cat main.go 
+  387  cd -
+  388  ls
+  389  bash file.sh 
+  390  ss -ntulp
+  391  bash file.sh 
+  392  ss -ntulp
+  393  cat file.sh 
+  394  history
+
+1  ss -ntulp
+    2  cd site-portfolio/
+    3  ls
+    4  cd cmd/
+    5  cat main.go 
+    6  exit
+    7  cd site-portfolio/
+    8  podman-compose down
+    9  podman images
+   10  podman rmi 5a13f4476892 8fc129c8fa8b
+   11  ls
+   12  ip addr
+   13  podman ps 
+   14  cat main.go 
+   15  curl -I http://127.0.0.1:8080
+   16  ss -ntulp
+   17  curl -I http://127.0.0.1:8080
+   18  curl -I http://172.31.46.47:8080
+   19  curl -I http://3.64.53.18:8080
+   20  pwd
+   21  cd cmd/
+   22  ls
+   23  export SMTP_USER=your-email@gmail.com
+   24  ip addr
+   25  host peterd.dev
+   26  cd..
+   27  cd ..
+   28  ls
+   29  cd
+   30  cat file.sh 
+   31  ss -ntulp
+   32  certbot --help 
+   33  certbot peterd.dev
+   34  certbot -d peterd.dev
+   35  sudo certbot -d peterd.dev
+   36  sudo certbot certonly -d peterd.dev
+   37  ls
+   38  cat file.sh 
+   39  ps aux | grep "go run cmd/main.go"
+   40  kill -9 34066
+   41  ps aux | grep "go run cmd/main.go"
+   42  ps aux | grep go
+   43  kill -9 34091
+   44  ps aux | grep go
+   45  cd site-portfolio/
+   46  cd cmd/
+   47  go run main.go 
+   48  ..
+   49  cd ..
+   50  go run cmd/main.go 
+   51  history
+
+#######
+root@ip-172-31-46-47:/etc/nginx/sites-available# ls
+default  peterd.dev.conf
+root@ip-172-31-46-47:/etc/nginx/sites-available# cat peterd.dev.conf 
+
+
+upstream portfolio {
+   server localhost:8080;
+   keepalive 32;
+}
+
+server {
+    listen 80;
+    server_name peterd.dev;
+
+    return 301 https://peterd.dev$request_uri;
+}
+
+
+server {
+    listen 443 http2;
+    server_name peterd.dev;
+
+    location / {
+	    #   client_max_body_size 50M;
+	    # proxy_set_header X-Real-IP $remote_addr;
+	    # proxy_http_version 1.1;
+       proxy_pass http://portfolio;
+    } 
+
+    access_log  /var/log/nginx/peterd.dev.access.log;
+    error_log  /var/log/nginx/peterd.dev.error.log;
+
+    ssl                         on;
+    # ssl_protocols       TLSv1.1 TLSv1.2;
+    #ssl_ciphers AES128-SHA:AES256-SHA:RC4-SHA:DES-CBC3-SHA:RC4-MD5;
+    # ssl_ciphers 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS';
+    # ssl_prefer_server_ciphers   on;
+
+    ssl_certificate             /etc/letsencrypt/live/peterd.dev/fullchain.pem;
+    ssl_certificate_key         /etc/letsencrypt/live/peterd.dev/privkey.pem;
+
+}
+
+root@ip-172-31-46-47:/etc/nginx/sites-available# 
+
+
+

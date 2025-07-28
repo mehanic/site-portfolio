@@ -8,7 +8,7 @@ import (
 
 func SetupRoutes(router *gin.Engine) {
 	// Load HTML templates
-	router.LoadHTMLGlob("templates/*")
+	router.LoadHTMLGlob("templates/*.html")
 	router.Static("/static", "./static")
 
 	// Define routes
@@ -22,9 +22,7 @@ func SetupRoutes(router *gin.Engine) {
 	// If you want a `/courses` route, add this:
 	router.GET("/courses", handlers.HandleCourses)
 
-	// Handle contact form submissions
-	router.POST("/send-message", handlers.HandleSendMessage)
-
+	
 	// 404 handler
 	router.NoRoute(func(c *gin.Context) {
 		c.JSON(404, gin.H{"error": "Page not found"})
@@ -33,4 +31,11 @@ func SetupRoutes(router *gin.Engine) {
 	router.GET("/photos", handlers.HandlePhotos)
 	router.GET("/videos", handlers.HandleVideos)
 	router.GET("/author", handlers.HandleAuthor)
+
+	
 }
+
+// func SetupRoutes(router *gin.Engine) {
+// 	// другие маршруты
+// 	SetupContactRoutes(router)
+// }

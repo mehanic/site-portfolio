@@ -19,15 +19,20 @@ import (
 // }
 
 func renderPage(c *gin.Context, page string) {
-	lang := getLanguage(c)                         // Get the selected language
-	template := page + "_" + lang + ".html"        // Generate the template name
-	log.Printf("Rendering template: %s", template) // Log the template name being used
-	c.HTML(http.StatusOK, template, gin.H{"Lang": lang})           // Render the template
+	lang := getLanguage(c)                               // Get the selected language
+	template := page + "_" + lang + ".html"              // Generate the template name
+	log.Printf("Rendering template: %s", template)       // Log the template name being used
+	c.HTML(http.StatusOK, template, gin.H{"Lang": lang}) // Render the template
 }
-
 
 func getLanguage(c *gin.Context) string {
 	lang := c.Query("lang") // Get `lang` from URL query
+
+	if lang == "" {
+		// work with language template
+		lang = c.PostForm("lang")
+	}
+
 	log.Printf("Selected language: %s", lang) // Log the selected language
 	if lang != "de" && lang != "en" && lang != "ar" {
 		lang = "en" // Default to English if no valid lang is found

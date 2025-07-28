@@ -366,23 +366,6 @@ Modify your **Go application's** database connection string in `config.go`:
 DBConnStr = "user=mehanic password=newpassword dbname=portfolio host=127.0.0.1 port=5432 sslmode=disable"
 ```
 
-Restart your application:
-
 ```bash
 go run cmd/main.go
 ```
-
----
-
-### **Summary**
-✅ **Created the user (`mehanic`)**  
-✅ **Created the database (`portfolio`)**  
-✅ **Granted permissions**  
-✅ **Updated authentication settings (`pg_hba.conf`)**  
-✅ **Restarted PostgreSQL**  
-✅ **Updated the app's connection string**  
-
-Now, your app should connect successfully! 🚀 Let me know if you need more help.
-
-
-sudo -u ubuntu /usr/local/bin/myservice
